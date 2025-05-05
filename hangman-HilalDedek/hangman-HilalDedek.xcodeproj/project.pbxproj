@@ -14,6 +14,9 @@
 		930B03332DC8C31800CB136A /* hangman_HilalDedek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 930B03312DC8C31800CB136A /* hangman_HilalDedek.xcdatamodeld */; };
 		930B03352DC8C31900CB136A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930B03342DC8C31900CB136A /* Assets.xcassets */; };
 		930B03382DC8C31900CB136A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930B03362DC8C31900CB136A /* LaunchScreen.storyboard */; };
+		93A3E10E2DC8D09200BCCFAC /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A3E10D2DC8D09100BCCFAC /* HangmanGame.swift */; };
+		93A3E1122DC8E4F000BCCFAC /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A3E1112DC8E4F000BCCFAC /* MainMenuViewController.swift */; };
+		93A3E1162DC8EF2600BCCFAC /* WordAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A3E1152DC8EF2600BCCFAC /* WordAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		930B03342DC8C31900CB136A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		930B03372DC8C31900CB136A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		930B03392DC8C31900CB136A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A3E10D2DC8D09100BCCFAC /* HangmanGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanGame.swift; sourceTree = "<group>"; };
+		93A3E1112DC8E4F000BCCFAC /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		93A3E1152DC8EF2600BCCFAC /* WordAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +68,13 @@
 				930B032A2DC8C31800CB136A /* SceneDelegate.swift */,
 				930B032C2DC8C31800CB136A /* ViewController.swift */,
 				930B032E2DC8C31800CB136A /* Main.storyboard */,
+				93A3E1112DC8E4F000BCCFAC /* MainMenuViewController.swift */,
 				930B03342DC8C31900CB136A /* Assets.xcassets */,
 				930B03362DC8C31900CB136A /* LaunchScreen.storyboard */,
 				930B03392DC8C31900CB136A /* Info.plist */,
 				930B03312DC8C31800CB136A /* hangman_HilalDedek.xcdatamodeld */,
+				93A3E10D2DC8D09100BCCFAC /* HangmanGame.swift */,
+				93A3E1152DC8EF2600BCCFAC /* WordAPIService.swift */,
 			);
 			path = "hangman-HilalDedek";
 			sourceTree = "<group>";
@@ -141,9 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A3E1122DC8E4F000BCCFAC /* MainMenuViewController.swift in Sources */,
 				930B032D2DC8C31800CB136A /* ViewController.swift in Sources */,
+				93A3E10E2DC8D09200BCCFAC /* HangmanGame.swift in Sources */,
 				930B03292DC8C31800CB136A /* AppDelegate.swift in Sources */,
 				930B032B2DC8C31800CB136A /* SceneDelegate.swift in Sources */,
+				93A3E1162DC8EF2600BCCFAC /* WordAPIService.swift in Sources */,
 				930B03332DC8C31800CB136A /* hangman_HilalDedek.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
