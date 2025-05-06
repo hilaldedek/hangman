@@ -7,16 +7,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var guessButton: UIButton!
-    // Hatalı harfler için yeni UI elemanları (IBOutlet bağlantılarını Storyboard'da yapmayı unutmayın)
-    @IBOutlet weak var wrongLetterSlot1: UILabel!
-    @IBOutlet weak var wrongLetterSlot2: UILabel!
-    @IBOutlet weak var wrongLetterSlot3: UILabel!
-    @IBOutlet weak var wrongLetterSlot4: UILabel!
-    @IBOutlet weak var wrongLetterSlot5: UILabel!
-    @IBOutlet weak var wrongLetterSlot6: UILabel!
+    @IBOutlet weak var wrongLettersLabel: UILabel! // Yeni Hatalı Harfler Outlet'ı
 
-    var currentLanguage: String? // MainMenu'den gelen dil bilgisi
-    var hangmanImages: [UIImage] = [] // Hangman resimlerini tutacak dizi
+    var currentLanguage: String?
+    var hangmanImages: [UIImage] = []
     var currentWord: String = ""
     var guessedLetters: [Character] = []
     var wrongGuessesRemaining = 6
@@ -25,8 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadHangmanImages()
-        startGame()
-        // updateUIForLanguage() - Lokalizasyon kaldırıldı
+        updateUIForLanguage()
+        updateWrongLettersDisplay() // Başlangıçta hatalı harfler etiketini güncelle
     }
 
     func loadHangmanImages() {
@@ -38,13 +32,14 @@ class ViewController: UIViewController {
         hangmanImageView.image = hangmanImages.first
     }
 
-    func startGame() {
+    func startGame(withNewWord word: String) {
+        currentWord = word
         guessedLetters = Array(repeating: "_", count: currentWord.count)
         updateWordLabel()
         wrongLetters.removeAll()
         wrongGuessesRemaining = 6
         updateHangmanImage()
-        updateWrongLettersLabel()
+        updateWrongLettersDisplay() // Yeni kelime başladığında hatalı harfler etiketini güncelle
         guessTextField.text = ""
         guessButton.isEnabled = true
     }
@@ -60,22 +55,8 @@ class ViewController: UIViewController {
         }
     }
 
-    func updateWrongLettersLabel() {
-        let wrongLetterSlots = [wrongLetterSlot1, wrongLetterSlot2, wrongLetterSlot3, wrongLetterSlot4, wrongLetterSlot5, wrongLetterSlot6]
-
-        for slot in wrongLetterSlots {
-            slot?.text = ""
-            slot?.backgroundColor = UIColor.clear
-            slot?.layer.borderWidth = 1
-            slot?.layer.borderColor = UIColor.lightGray.cgColor
-            slot?.textAlignment = .center
-        }
-
-        for (index, letter) in wrongLetters.enumerated() {
-            if index < wrongLetterSlots.count {
-                wrongLetterSlots[index]?.text = String(letter)
-            }
-        }
+    func updateWrongLettersDisplay() {
+        wrongLettersLabel.text = "Hatalı Harfler: " + wrongLetters.map { String($0) }.joined(separator: ", ")
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -102,7 +83,7 @@ class ViewController: UIViewController {
                 wrongGuessesRemaining -= 1
                 wrongLetters.append(guessedLetter)
                 updateHangmanImage()
-                updateWrongLettersLabel()
+                updateWrongLettersDisplay() // Hatalı tahmin yapıldığında etiketi güncelle
                 if wrongGuessesRemaining == 0 {
                     showAlert(message: "Kaybettiniz! Doğru kelime: \(currentWord)")
                     guessButton.isEnabled = false
@@ -113,17 +94,24 @@ class ViewController: UIViewController {
 
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "Oyun Sonucu", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Tamam", style: .default) { [weak self] _ in
-            self?.startGame()
+        let okAction = UIAlertAction(title: "Yeni Oyun", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
         }
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
 
-    // Dil bazlı metinleri güncelle (lokalizasyon kaldırıldı)
     func updateUIForLanguage() {
         guessTextField.placeholder = "Bir harf girin"
         guessButton.setTitle("Tahmin Et", for: .normal)
         backButton.setTitle("Geri", for: .normal)
+    }
+
+    var currentWordSet: String? {
+        didSet {
+            if let word = currentWordSet {
+                startGame(withNewWord: word)
+            }
+        }
     }
 }
