@@ -25,14 +25,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bir dil seçiniz:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1q-lV-DQJ">
-                                <rect key="frame" x="109" y="269" width="216" height="21"/>
+                                <rect key="frame" x="137" y="250" width="119" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ien-PQ-fzV">
-                                <rect key="frame" x="221" y="265" width="36" height="30"/>
+                                <rect key="frame" x="137" y="267" width="120" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <menu key="menu" id="XHA-zQ-kfv">
                                     <children>
@@ -42,13 +42,6 @@
                                 </menu>
                                 <state key="normal" title="Diller"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seçilen Dil:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9re-R3-Tir">
-                                <rect key="frame" x="73" y="303" width="288" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gR2-5Y-A4I">
                                 <rect key="frame" x="137" y="362" width="119" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -59,6 +52,13 @@
                                     <segue destination="v56-r4-6mf" kind="push" identifier="goToGameScene" id="2uP-K7-0xI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seçilen Dil:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9re-R3-Tir">
+                                <rect key="frame" x="89" y="305" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="r5E-iL-4nZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -137,7 +137,6 @@
                         <outlet property="guessTextField" destination="tOu-4p-aIy" id="7tT-qa-aRJ"/>
                         <outlet property="hangmanImageView" destination="BG4-b6-mY9" id="9IL-WR-QGi"/>
                         <outlet property="wordLabel" destination="AHO-T6-WzQ" id="D9I-T2-pgf"/>
-                        <outlet property="wrongLettersLabel" destination="au1-ri-kNT" id="wuU-tl-Jvr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRe-lW-ZEp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -8,13 +8,18 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var languageInstructionLabel: UILabel!
 
     // Diller ve seçili dil
-    var languages = ["Türkçe", "English"] // Şimdilik sadece bu diller
+    var languages = ["Brazilian Portuguese","French","German","Italian","Spanish", "English"] // Şimdilik sadece bu diller
     var selectedLanguage = ""
 
     // Dil kodları (API'nin beklediği formatta)
     var languageCodes: [String: String] = [
-        "Türkçe": "tr",
-        "English": "en"
+        "Spanish": "es",
+        "English": "",
+        "Italian":"it",
+        "German":"de",
+        "French":"fr",
+        "Brazilian Portuguese":"pt-br",
+        
     ]
 
     override func viewDidLoad() {
@@ -160,9 +165,12 @@ class MainMenuViewController: UIViewController {
                     if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String] {
                         if let randomWord = jsonResult.first?.uppercased() {
                             completion(randomWord)
+                            
                             return
                         }
+                        print("JSON RİZAOLTU",jsonResult)
                     }
+                    
                     print("Beklenmeyen JSON formatı")
                     completion(nil)
                 } catch {
