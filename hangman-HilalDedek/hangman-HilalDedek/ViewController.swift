@@ -7,7 +7,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var guessTextField: UITextField!
     @IBOutlet weak var guessButton: UIButton!
-    @IBOutlet weak var wrongLettersLabel: UILabel! // Yeni Hatalı Harfler Outlet'ı
+    @IBOutlet weak var wrongLettersLabel: UILabel!
 
     var currentLanguage: String?
     var hangmanImages: [UIImage] = []
@@ -20,7 +20,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         loadHangmanImages()
         updateUIForLanguage()
-        updateWrongLettersDisplay() // Başlangıçta hatalı harfler etiketini güncelle
+        updateWrongLettersDisplay()
+        
+        // viewDidLoad sonunda wrongLettersLabel kontrolü
+        if wrongLettersLabel == nil {
+            print("viewDidLoad: HATA: wrongLettersLabel hala nil!")
+        } else {
+            print("viewDidLoad: wrongLettersLabel bağlı.")
+        }
     }
 
     func loadHangmanImages() {
@@ -39,13 +46,19 @@ class ViewController: UIViewController {
         wrongLetters.removeAll()
         wrongGuessesRemaining = 6
         updateHangmanImage()
-        updateWrongLettersDisplay() // Yeni kelime başladığında hatalı harfler etiketini güncelle
+        updateWrongLettersDisplay()
         guessTextField.text = ""
         guessButton.isEnabled = true
     }
 
     func updateWordLabel() {
+        print("updateWordLabel() çağrıldı. wordLabel: \(String(describing: wordLabel)), guessedLetters: \(guessedLetters)")
+        if wordLabel == nil {
+            print("updateWordLabel(): HATA: wordLabel hala nil!")
+            return
+        }
         wordLabel.text = guessedLetters.map { String($0) }.joined(separator: " ")
+        print("updateWordLabel(): wordLabel.text ayarlandı: \(String(describing: wordLabel.text))")
     }
 
     func updateHangmanImage() {
@@ -56,7 +69,13 @@ class ViewController: UIViewController {
     }
 
     func updateWrongLettersDisplay() {
+        print("updateWrongLettersDisplay() çağrıldı. wrongLettersLabel: \(String(describing: wrongLettersLabel)), wrongLetters: \(wrongLetters)")
+        if wrongLettersLabel == nil {
+            print("updateWrongLettersDisplay(): HATA: wrongLettersLabel nil!")
+            return
+        }
         wrongLettersLabel.text = "Hatalı Harfler: " + wrongLetters.map { String($0) }.joined(separator: ", ")
+        print("updateWrongLettersDisplay(): wrongLettersLabel.text ayarlandı: \(String(describing: wrongLettersLabel.text))")
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -83,7 +102,7 @@ class ViewController: UIViewController {
                 wrongGuessesRemaining -= 1
                 wrongLetters.append(guessedLetter)
                 updateHangmanImage()
-                updateWrongLettersDisplay() // Hatalı tahmin yapıldığında etiketi güncelle
+                updateWrongLettersDisplay()
                 if wrongGuessesRemaining == 0 {
                     showAlert(message: "Kaybettiniz! Doğru kelime: \(currentWord)")
                     guessButton.isEnabled = false
@@ -113,5 +132,9 @@ class ViewController: UIViewController {
                 startGame(withNewWord: word)
             }
         }
+    }
+
+    deinit {
+        print("ViewController serbest bırakıldı")
     }
 }

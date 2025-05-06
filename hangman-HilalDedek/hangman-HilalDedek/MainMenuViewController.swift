@@ -8,18 +8,17 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var languageInstructionLabel: UILabel!
 
     // Diller ve seçili dil
-    var languages = ["Brazilian Portuguese","French","German","Italian","Spanish", "English"] // Şimdilik sadece bu diller
+    var languages = ["Brazilian Portuguese", "French", "German", "Italian", "Spanish", "English"]
     var selectedLanguage = ""
 
-    // Dil kodları (API'nin beklediği formatta)
+    // Dil kodları
     var languageCodes: [String: String] = [
         "Spanish": "es",
         "English": "",
-        "Italian":"it",
-        "German":"de",
-        "French":"fr",
-        "Brazilian Portuguese":"pt-br",
-
+        "Italian": "it",
+        "German": "de",
+        "French": "fr",
+        "Brazilian Portuguese": "pt-br",
     ]
 
     override func viewDidLoad() {
@@ -29,26 +28,17 @@ class MainMenuViewController: UIViewController {
 
     // UI kurulumu
     func setupUI() {
-        // Başlık
         titleLabel.text = "Hangman"
         titleLabel.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-
-        // Dil talimatı
         updateLanguageInstructionLabel()
-
-        // Dil açılır menüsü
         configureLanguageDropDownMenu()
-
-        // Başlangıçta oyun başlatma butonu devre dışı
         startGameButton.isEnabled = false
         updateStartButtonAppearance()
-
-        // Başlangıçta stil ayarlamaları
         startGameButton.layer.cornerRadius = 10
         languageDropDownButton.layer.cornerRadius = 8
     }
 
-    // Dil açılır menüsü yapılandırması
+    // Dil açılır menüsü
     func configureLanguageDropDownMenu() {
         let menu = UIMenu(title: "Dil Seçiniz", options: .displayInline, children: createLanguageActions())
 
@@ -57,14 +47,13 @@ class MainMenuViewController: UIViewController {
             languageDropDownButton.showsMenuAsPrimaryAction = true
             languageDropDownButton.setTitle("Dil Seçiniz", for: .normal)
         } else {
-            // iOS 14 öncesi için alternatif çözüm
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLanguageActionSheet))
             languageDropDownButton.addGestureRecognizer(tapGesture)
             languageDropDownButton.setTitle("Dil Seçiniz", for: .normal)
         }
     }
 
-    // Dil seçenekleri için UIAction'lar oluştur
+    // Dil seçenekleri için UIAction'lar
     func createLanguageActions() -> [UIAction] {
         var actions = [UIAction]()
 
@@ -73,7 +62,7 @@ class MainMenuViewController: UIViewController {
                 self?.selectedLanguage = language
                 self?.languageDropDownButton.setTitle(language, for: .normal)
                 self?.languageInstructionLabel.text = "Kelime yükleniyor..."
-                self?.startGameButton.isEnabled = false // Kelime yüklenirken butonu devre dışı bırak
+                self?.startGameButton.isEnabled = false
                 self?.updateStartButtonAppearance()
 
                 var apiUrlString = "https://random-word-api.herokuapp.com/word"
@@ -105,7 +94,7 @@ class MainMenuViewController: UIViewController {
         return actions
     }
 
-    // iOS 14 öncesi için ActionSheet göster
+    // iOS 14 öncesi için ActionSheet
     @objc func showLanguageActionSheet() {
         let actionSheet = UIAlertController(title: "Dil Seçiniz", message: nil, preferredStyle: .actionSheet)
 
@@ -149,11 +138,11 @@ class MainMenuViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
 
-    // Rastgele kelime çekme fonksiyonu (URL alacak şekilde güncellendi)
+    // Rastgele kelime çekme
     func fetchRandomWord(withURL url: URL, completion: @escaping (String?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("API isteği sırasında hata: \(error)")
+                print("API isteği hatası: \(error)")
                 completion(nil)
                 return
             }
@@ -171,9 +160,8 @@ class MainMenuViewController: UIViewController {
                             completion(randomWord)
                             return
                         }
-                        print("JSON RİZAOLTU",jsonResult)
+                        print("JSON Sonucu:", jsonResult)
                     }
-
                     print("Beklenmeyen JSON formatı")
                     completion(nil)
                 } catch {
@@ -184,45 +172,41 @@ class MainMenuViewController: UIViewController {
         }.resume()
     }
 
-    // Başlat butonunun görünümünü güncelle
+    // Başlat butonunun görünümü
     func updateStartButtonAppearance() {
-        if startGameButton.isEnabled {
-            startGameButton.alpha = 1.0
-            startGameButton.backgroundColor = UIColor.systemBlue
-        } else {
-            startGameButton.alpha = 0.5
-            startGameButton.backgroundColor = UIColor.systemGray
-        }
+        startGameButton.alpha = startGameButton.isEnabled ? 1.0 : 0.5
+        startGameButton.backgroundColor = startGameButton.isEnabled ? UIColor.systemBlue : UIColor.systemGray
     }
 
-    // Dil talimat etiketini güncelle
+    // Dil talimat etiketi
     func updateLanguageInstructionLabel() {
         if selectedLanguage.isEmpty {
             languageInstructionLabel.text = "Lütfen bir dil seçin"
             languageInstructionLabel.textColor = UIColor.systemRed
         } else {
-            if selectedLanguage == "Türkçe" {
-                languageInstructionLabel.text = "Oyuna başlamak için butona tıklayın"
-            } else if selectedLanguage == "English" {
-                languageInstructionLabel.text = "Click the button to start the game"
-            }
+            let text = selectedLanguage == "Türkçe" ? "Oyuna başlamak için butona tıklayın" : "Click the button to start the game"
+            languageInstructionLabel.text = text
             languageInstructionLabel.textColor = UIColor.darkGray
         }
     }
 
-    // Oyuna başla butonuna tıklandığında (artık kelime çekildikten sonra segue tetikleniyor)
-    @IBAction func startGameButtonTapped(_ sender: UIButton) {
-        // Bu metot şu an için doğrudan bir işlem yapmıyor.
-        // Segue, dil seçiminde API yanıtıyla birlikte tetikleniyor.
-    }
+    // Oyuna başla butonu (segue tetikleniyor)
+    @IBAction func startGameButtonTapped(_ sender: UIButton) {}
 
-    // Segue hazırlığı - Dil ve kelime bilgisini aktarma
+    // Segue hazırlığı
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToGameScene" {
             if let gameVC = segue.destination as? ViewController, let word = sender as? String {
                 gameVC.currentLanguage = selectedLanguage
-                gameVC.currentWordSet = word // Doğrudan currentWord yerine currentWordSet'i set ediyoruz
+                gameVC.currentWordSet = word
+                print("ViewController'a geçiş yapılıyor. Kelime: \(word), gameVC: \(String(describing: gameVC))") // Debug
+            } else {
+                print("HATA: ViewController'a geçiş başarısız!") // Debug
             }
         }
+    }
+
+    deinit {
+        print("MainMenuViewController serbest bırakıldı") // Debug
     }
 }
