@@ -61,7 +61,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="startGameButtonTapped:" destination="cAx-I9-ANk" eventType="touchUpInside" id="gpk-bM-0fM"/>
-                                    <segue destination="v56-r4-6mf" kind="push" identifier="goToGameScene" id="2uP-K7-0xI"/>
+                                    <segue destination="v56-r4-6mf" kind="show" identifier="goToGameScene" id="2uP-K7-0xI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HANGMAN" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8V-DP-MXY">
@@ -306,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRe-lW-ZEp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5.343511450381679" y="809.85915492957747"/>
+            <point key="canvasLocation" x="123" y="736"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdr-3W-oLX">
@@ -340,7 +340,7 @@
         <image name="gallow stick man" width="128" height="128"/>
         <image name="gallow2" width="128" height="128"/>
         <image name="gallows" width="128" height="128"/>
-        <image name="hangman0" width="200" height="350"/>
+        <image name="hangman0" width="1080" height="1321"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

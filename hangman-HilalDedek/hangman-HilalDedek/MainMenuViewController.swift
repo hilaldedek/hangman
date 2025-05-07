@@ -96,38 +96,45 @@ class MainMenuViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
 
-    // Rastgele kelime çekme (artık startGameButtonTapped içinde çağrılıyor)
-    func fetchRandomWord(withURL url: URL, completion: @escaping (String?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("API isteği hatası: \(error)")
-                completion(nil)
-                return
-            }
+    // Rastgele kelime çekme
+    func fetchRandomWord(withLanguageCode languageCode: String?, completion: @escaping (String?) -> Void) {
+        var apiUrlString = "https://random-word-api.herokuapp.com/word"
+        if let code = languageCode, !code.isEmpty {
+            apiUrlString += "?lang=\(code)"
+        }
 
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Geçersiz HTTP yanıtı")
-                completion(nil)
-                return
-            }
+        if let url = URL(string: apiUrlString) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print("API isteği hatası: \(error)")
+                    completion(nil)
+                    return
+                }
 
-            if let data = data {
-                do {
-                    if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String] {
-                        if let randomWord = jsonResult.first?.uppercased() {
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    print("Geçersiz HTTP yanıtı")
+                    completion(nil)
+                    return
+                }
+
+                if let data = data {
+                    do {
+                        if let jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as? [String], let randomWord = jsonResult.first?.uppercased() {
                             completion(randomWord)
                             return
                         }
-                        print("JSON Sonucu:", jsonResult)
+                        print("Beklenmeyen JSON formatı")
+                        completion(nil)
+                    } catch {
+                        print("JSON ayrıştırma hatası: \(error)")
+                        completion(nil)
                     }
-                    print("Beklenmeyen JSON formatı")
-                    completion(nil)
-                } catch {
-                    print("JSON ayrıştırma hatası: \(error)")
-                    completion(nil)
                 }
-            }
-        }.resume()
+            }.resume()
+        } else {
+            print("Geçersiz API URL'si oluşturulamadı.")
+            completion(nil)
+        }
     }
 
     // Başlat butonunun görünümü
@@ -166,7 +173,7 @@ class MainMenuViewController: UIViewController {
 
     // Oyuna başla butonu (kelime çekiliyor ve segue tetikleniyor)
     @IBAction func startGameButtonTapped(_ sender: UIButton) {
-        guard let selectedLanguage = self.selectedLanguage else {
+        guard let selectedLanguageCode = self.selectedLanguageCode else {
             languageInstructionLabel.text = "Lütfen önce bir dil seçin."
             languageInstructionLabel.textColor = UIColor.systemRed
             return
@@ -176,27 +183,16 @@ class MainMenuViewController: UIViewController {
         startGameButton.isEnabled = false
         updateStartButtonAppearance()
 
-        var apiUrlString = "https://random-word-api.herokuapp.com/word"
-        if let languageCode = self.selectedLanguageCode, !languageCode.isEmpty {
-            apiUrlString += "?lang=\(languageCode)"
-        }
-
-        if let url = URL(string: apiUrlString) {
-            self.fetchRandomWord(withURL: url) { randomWord in
-                DispatchQueue.main.async {
-                    if let word = randomWord {
-                        self.performSegue(withIdentifier: "goToGameScene", sender: word)
-                    } else {
-                        self.languageInstructionLabel.text = "Kelime yüklenirken hata oluştu."
-                        self.startGameButton.isEnabled = true
-                        self.updateStartButtonAppearance()
-                    }
+        fetchRandomWord(withLanguageCode: selectedLanguageCode) { randomWord in
+            DispatchQueue.main.async {
+                if let word = randomWord {
+                    self.performSegue(withIdentifier: "goToGameScene", sender: word)
+                } else {
+                    self.languageInstructionLabel.text = "Kelime yüklenirken hata oluştu."
+                    self.startGameButton.isEnabled = true
+                    self.updateStartButtonAppearance()
                 }
             }
-        } else {
-            self.languageInstructionLabel.text = "Geçersiz API URL'si."
-            self.startGameButton.isEnabled = true
-            self.updateStartButtonAppearance()
         }
     }
 
@@ -206,10 +202,35 @@ class MainMenuViewController: UIViewController {
             if let gameVC = segue.destination as? ViewController, let word = sender as? String {
                 gameVC.currentLanguage = selectedLanguage
                 gameVC.currentWordSet = word
-                print("ViewController'a geçiş yapılıyor. Kelime: \(word), gameVC: \(String(describing: gameVC))") // Debug
+                print("MainMenuViewController -> ViewController: Kelime gönderildi: \(word), Dil: \(String(describing: selectedLanguage))") // Debug
             } else {
                 print("HATA: ViewController'a geçiş başarısız!") // Debug
             }
+        }
+    }
+
+    // MainMenuViewController'a geri dönüldüğünde çalışır
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let languageCode = selectedLanguageCode {
+            languageInstructionLabel.text = "Yeni kelime yükleniyor..."
+            startGameButton.isEnabled = false
+            updateStartButtonAppearance()
+            fetchRandomWord(withLanguageCode: languageCode) { [weak self] newWord in
+                DispatchQueue.main.async {
+                    if let word = newWord {
+                        self?.performSegue(withIdentifier: "goToGameScene", sender: word)
+                    } else {
+                        self?.languageInstructionLabel.text = "Yeni kelime yüklenirken hata oluştu."
+                        self?.startGameButton.isEnabled = true
+                        self?.updateStartButtonAppearance()
+                    }
+                }
+            }
+        } else {
+            languageInstructionLabel.text = "Lütfen bir dil seçin"
+            startGameButton.isEnabled = false
+            updateStartButtonAppearance()
         }
     }
 

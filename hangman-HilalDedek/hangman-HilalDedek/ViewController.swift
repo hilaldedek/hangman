@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         updateUIForLanguage()
         updateWordLabel()
         updateWrongLettersDisplay()
-        
+
         // viewDidLoad sonunda wrongLettersLabel kontrolü
         if wrongLettersLabel == nil {
             print("viewDidLoad: HATA: wrongLettersLabel hala nil! view controller satır 27")
@@ -113,6 +113,7 @@ class ViewController: UIViewController {
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "Oyun Sonucu", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Yeni Oyun", style: .default) { [weak self] _ in
+            // MainMenuViewController'a geri dön
             self?.navigationController?.popViewController(animated: true)
         }
         alertController.addAction(okAction)
