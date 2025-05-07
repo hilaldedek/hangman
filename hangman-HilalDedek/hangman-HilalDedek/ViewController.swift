@@ -20,13 +20,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         loadHangmanImages()
         updateUIForLanguage()
+        updateWordLabel()
         updateWrongLettersDisplay()
         
         // viewDidLoad sonunda wrongLettersLabel kontrolü
         if wrongLettersLabel == nil {
-            print("viewDidLoad: HATA: wrongLettersLabel hala nil!")
+            print("viewDidLoad: HATA: wrongLettersLabel hala nil! view controller satır 27")
         } else {
-            print("viewDidLoad: wrongLettersLabel bağlı.")
+            print("viewDidLoad: wrongLettersLabel bağlı. view controller satır 29")
         }
     }
 
@@ -50,13 +51,13 @@ class ViewController: UIViewController {
     }
 
     func updateWordLabel() {
-        print("updateWordLabel() çağrıldı. wordLabel: \(String(describing: wordLabel)), guessedLetters: \(guessedLetters)")
+        print("updateWordLabel() çağrıldı. wordLabel: \(String(describing: wordLabel)), guessedLetters: \(guessedLetters) - view controller satır 53")
         if wordLabel == nil {
             print("updateWordLabel(): HATA: wordLabel hala nil!")
             return
         }
         wordLabel.text = guessedLetters.map { String($0) }.joined(separator: " ")
-        print("updateWordLabel(): wordLabel.text ayarlandı: \(String(describing: wordLabel.text))")
+        print("updateWordLabel(): wordLabel.text ayarlandı: \(String(describing: wordLabel.text))- view controller satır 59")
     }
 
     func updateHangmanImage() {
@@ -67,13 +68,13 @@ class ViewController: UIViewController {
     }
 
     func updateWrongLettersDisplay() {
-        print("updateWrongLettersDisplay() çağrıldı. wrongLettersLabel: \(String(describing: wrongLettersLabel)), wrongLetters: \(wrongLetters)")
+        print("updateWrongLettersDisplay() çağrıldı. wrongLettersLabel: \(String(describing: wrongLettersLabel)), wrongLetters: \(wrongLetters)-view controller satır 70")
         if wrongLettersLabel == nil {
-            print("updateWrongLettersDisplay(): HATA: wrongLettersLabel nil!")
+            print("updateWrongLettersDisplay(): HATA: wrongLettersLabel nil! - view controller satır 72")
             return
         }
         wrongLettersLabel.text = "Hatalı Harfler: " + wrongLetters.map { String($0) }.joined(separator: ", ")
-        print("updateWrongLettersDisplay(): wrongLettersLabel.text ayarlandı: \(String(describing: wrongLettersLabel.text))")
+        print("updateWrongLettersDisplay(): wrongLettersLabel.text ayarlandı: \(String(describing: wrongLettersLabel.text)) - view controller satır 76")
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {

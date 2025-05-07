@@ -270,10 +270,14 @@
                                 <rect key="frame" x="359" y="620" width="43" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="gallow stick man" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-ts-AMP">
+                                <rect key="frame" x="150" y="620" width="43" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="au1-ri-kNT">
                                 <rect key="frame" x="0.0" y="657" width="393" height="195"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Hatalı Harfler:">
                                         <attributes>
@@ -283,12 +287,9 @@
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="gallow stick man" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-ts-AMP">
-                                <rect key="frame" x="150" y="620" width="43" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4xy-MJ-wGf"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -299,7 +300,7 @@
                         <outlet property="guessButton" destination="yKQ-x6-AaF" id="z4C-x5-ij3"/>
                         <outlet property="guessTextField" destination="tOu-4p-aIy" id="7tT-qa-aRJ"/>
                         <outlet property="hangmanImageView" destination="BG4-b6-mY9" id="9IL-WR-QGi"/>
-                        <outlet property="wordLabel" destination="AHO-T6-WzQ" id="6xx-up-peT"/>
+                        <outlet property="wordLabel" destination="AHO-T6-WzQ" id="4QZ-tI-oek"/>
                         <outlet property="wrongLettersLabel" destination="au1-ri-kNT" id="EBt-OJ-8hV"/>
                     </connections>
                 </viewController>
