@@ -47,8 +47,6 @@ class ViewController: UIViewController {
         wrongGuessesRemaining = 6
         updateHangmanImage()
         updateWrongLettersDisplay()
-        guessTextField.text = ""
-        guessButton.isEnabled = true
     }
 
     func updateWordLabel() {
