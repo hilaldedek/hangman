@@ -143,16 +143,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSw-nr-VWA">
-                                <rect key="frame" x="26" y="30" width="56" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Geri"/>
-                                <connections>
-                                    <action selector="backButtonTapped:" destination="v56-r4-6mf" eventType="touchUpInside" id="f5h-Hc-4SP"/>
-                                    <segue destination="9rt-OY-T3s" kind="presentation" id="NtK-uJ-1P4"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hangman0" translatesAutoresizingMaskIntoConstraints="NO" id="BG4-b6-mY9">
                                 <rect key="frame" x="86" y="79" width="226" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -296,7 +286,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Skr-Fo-VZW"/>
                     <connections>
-                        <outlet property="backButton" destination="xSw-nr-VWA" id="Rn3-FY-Vwm"/>
                         <outlet property="guessButton" destination="yKQ-x6-AaF" id="z4C-x5-ij3"/>
                         <outlet property="guessTextField" destination="tOu-4p-aIy" id="7tT-qa-aRJ"/>
                         <outlet property="hangmanImageView" destination="BG4-b6-mY9" id="9IL-WR-QGi"/>
@@ -311,10 +300,11 @@
         <!--Navigation Controller-->
         <scene sceneID="zdr-3W-oLX">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0RQ-ta-ENF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9rt-OY-T3s" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fOX-46-8ts">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -322,7 +312,6 @@
                         <segue destination="cAx-I9-ANk" kind="relationship" relationship="rootViewController" id="LBR-Gg-FTh"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0RQ-ta-ENF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="875.57251908396938" y="46.478873239436624"/>
         </scene>

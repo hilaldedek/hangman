@@ -211,28 +211,20 @@ class MainMenuViewController: UIViewController {
 
     // MainMenuViewController'a geri dönüldüğünde çalışır
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let languageCode = selectedLanguageCode {
-            languageInstructionLabel.text = "Yeni kelime yükleniyor..."
-            startGameButton.isEnabled = false
-            updateStartButtonAppearance()
-            fetchRandomWord(withLanguageCode: languageCode) { [weak self] newWord in
-                DispatchQueue.main.async {
-                    if let word = newWord {
-                        self?.performSegue(withIdentifier: "goToGameScene", sender: word)
-                    } else {
-                        self?.languageInstructionLabel.text = "Yeni kelime yüklenirken hata oluştu."
-                        self?.startGameButton.isEnabled = true
-                        self?.updateStartButtonAppearance()
-                    }
-                }
+            super.viewWillAppear(animated)
+            // Sayfa her göründüğünde dil seçiminin geçerli olduğundan emin ol
+            if selectedLanguageCode == nil {
+                languageInstructionLabel.text = "Lütfen bir dil seçin"
+                languageInstructionLabel.textColor = UIColor.systemRed
+                startGameButton.isEnabled = false
+                updateStartButtonAppearance()
+            } else {
+                languageInstructionLabel.text = "Oyuna başlamak için butona tıklayın." // Veya başka bir bilgilendirici metin
+                languageInstructionLabel.textColor = UIColor.darkGray
+                startGameButton.isEnabled = true
+                updateStartButtonAppearance()
             }
-        } else {
-            languageInstructionLabel.text = "Lütfen bir dil seçin"
-            startGameButton.isEnabled = false
-            updateStartButtonAppearance()
         }
-    }
 
     deinit {
         print("MainMenuViewController serbest bırakıldı") // Debug
