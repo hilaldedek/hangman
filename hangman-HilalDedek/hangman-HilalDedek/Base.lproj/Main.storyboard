@@ -61,7 +61,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="startGameButtonTapped:" destination="cAx-I9-ANk" eventType="touchUpInside" id="gpk-bM-0fM"/>
-                                    <segue destination="v56-r4-6mf" kind="show" identifier="goToGameScene" id="2uP-K7-0xI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HANGMAN" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8V-DP-MXY">
@@ -129,6 +128,7 @@
                         <outlet property="languageInstructionLabel" destination="9re-R3-Tir" id="GtZ-3P-h2X"/>
                         <outlet property="startGameButton" destination="gR2-5Y-A4I" id="mOC-3b-M31"/>
                         <outlet property="titleLabel" destination="b8V-DP-MXY" id="IpH-B9-2nk"/>
+                        <segue destination="v56-r4-6mf" kind="push" identifier="goToGameScene" id="8xx-dr-nkG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sHF-UY-M1W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -295,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRe-lW-ZEp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="123" y="736"/>
+            <point key="canvasLocation" x="1698" y="751"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdr-3W-oLX">
