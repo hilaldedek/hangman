@@ -149,17 +149,17 @@ class MainMenuViewController: UIViewController {
             let localizedText: String
             switch selectedLanguage {
             case "Brazilian Portuguese":
-                localizedText = "Para começar o jogo, clique no botão"
+                localizedText = "Brazilian Portuguese"
             case "French":
-                localizedText = "Pour démarrer le jeu, cliquez sur le bouton"
+                localizedText = "French"
             case "German":
-                localizedText = "Klicken Sie auf die Schaltfläche, um das Spiel zu starten"
+                localizedText = "German"
             case "Italian":
-                localizedText = "Per iniziare il gioco, clicca sul pulsante"
+                localizedText = "Italian"
             case "Spanish":
-                localizedText = "Para empezar el juego, haz clic en el botón"
+                localizedText = "Spanish"
             default: // English
-                localizedText = "Click the button to start the game"
+                localizedText = "English"
             }
             languageInstructionLabel.text = localizedText
             languageInstructionLabel.textColor = UIColor.darkGray
@@ -219,7 +219,7 @@ class MainMenuViewController: UIViewController {
                 startGameButton.isEnabled = false
                 updateStartButtonAppearance()
             } else {
-                languageInstructionLabel.text = "Oyuna başlamak için butona tıklayın." // Veya başka bir bilgilendirici metin
+                updateLanguageInstructionLabel() // Veya başka bir bilgilendirici metin
                 languageInstructionLabel.textColor = UIColor.darkGray
                 startGameButton.isEnabled = true
                 updateStartButtonAppearance()
